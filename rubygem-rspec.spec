@@ -6,8 +6,8 @@
 
 Summary: Behaviour driven development (BDD) framework for Ruby
 Name: rubygem-%{gemname}
-Version: 1.1.11
-Release: 2%{?dist}
+Version: 1.2.2
+Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://rspec.rubyforge.org
@@ -53,6 +53,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Mar 27 2009 Michael Stahnke <stahnma@fedoraproject.org> - 1.2.2-1
+- New Version 
+
 * Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.11-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
