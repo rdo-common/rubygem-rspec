@@ -6,7 +6,7 @@
 
 Summary: Behaviour driven development (BDD) framework for Ruby
 Name: rubygem-%{gemname}
-Version: 1.2.2
+Version: 1.2.7
 Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
@@ -53,6 +53,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jun 22 2009 Michael Stahnke <stahnma@fedoraproject.org> - 1.2.7-1
+- New Version
+
 * Fri Mar 27 2009 Michael Stahnke <stahnma@fedoraproject.org> - 1.2.2-1
 - New Version 
 
