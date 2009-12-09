@@ -1,4 +1,3 @@
-# Generated from rspec-1.1.3.gem by gem2rpm -*- rpm-spec -*-
 %define ruby_sitelib %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
 %define gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %define gemname rspec
@@ -6,8 +5,8 @@
 
 Summary: Behaviour driven development (BDD) framework for Ruby
 Name: rubygem-%{gemname}
-Version: 1.2.7
-Release: 2%{?dist}
+Version: 1.2.9
+Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://rspec.rubyforge.org
@@ -53,6 +52,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Dec 09 2009 Michael Stahnke <stahnma@fedoraproject.org> - 1.2.9-1
+- New Version
+
 * Sun Jul 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.2.7-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
