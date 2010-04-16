@@ -6,7 +6,7 @@
 Summary: Behaviour driven development (BDD) framework for Ruby
 Name: rubygem-%{gemname}
 Version: 1.3.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://rspec.info
@@ -18,10 +18,7 @@ BuildArch: noarch
 Provides: rubygem(%{gemname}) = %{version}
 
 %description
-RSpec is a behaviour driven development (BDD) framework for Ruby.  RSpec was
-created in response to Dave Astels' article _A New Look at Test Driven
-Development_ which can be read at: http://daveastels.com/index.php?p=5  RSpec
-is intended to provide the features discussed in Dave's article.
+RSpec is a behaviour driven development (BDD) framework for Ruby.  
 
 
 %prep
@@ -52,6 +49,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Apr 16 2010 Michael Stahnke <stahnma@fedpraproject.org> - 1.3.0-2
+- Removed 404 URL in the description (bug 515042)
+
 * Fri Apr 09 2010 Michael Stahnke <stahnma@fedpraproject.org> - 1.3.0-1
 - Updated to 1.3.0
 
