@@ -6,7 +6,7 @@
 Summary: Behaviour driven development (BDD) framework for Ruby
 Name: rubygem-%{gemname}
 Version: 1.3.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://rspec.info
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.3.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
 * Fri Apr 16 2010 Michael Stahnke <stahnma@fedpraproject.org> - 1.3.0-2
 - Removed 404 URL in the description (bug 515042)
 
