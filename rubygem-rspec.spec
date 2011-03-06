@@ -5,12 +5,13 @@
 
 Summary: Behaviour driven development (BDD) framework for Ruby
 Name: rubygem-%{gemname}
-Version: 1.3.0
-Release: 3%{?dist}
+Version: 1.3.1
+Release: 1%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://rspec.info
 Source0: http://gems.rubyforge.org/gems/%{gemname}-%{version}.gem
+Patch0:  rubygem-rspec-1.3.1-RakeFileUtils_renamed_to_FileUtilsExt.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: rubygems, ruby(abi)  = 1.8
 BuildRequires: rubygems, ruby
@@ -22,17 +23,28 @@ RSpec is a behaviour driven development (BDD) framework for Ruby.
 
 
 %prep
+%setup -q -c -T
+gem install \
+	-V \
+	--install-dir $(pwd)%{gemdir} \
+	--bindir $(pwd)%{_bindir} \
+	--force \
+	--rdoc \
+	%{SOURCE0}
+
+
+pushd .%{geminstdir}
+%patch0 -p1
+popd
+
+find . -type f | xargs chmod ugo+r
 
 %build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}%{gemdir}
-gem install --local --install-dir %{buildroot}%{gemdir} \
-            --force --rdoc %{SOURCE0}
-mkdir -p %{buildroot}/%{_bindir}
-mv %{buildroot}%{gemdir}/bin/* %{buildroot}/%{_bindir}
-rmdir %{buildroot}%{gemdir}/bin
+cp -a .%{_prefix}/* %{buildroot}%{_prefix}/
+
 find %{buildroot}%{geminstdir}/bin -type f | xargs chmod a+x
 
 %clean
@@ -49,6 +61,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 09 2011 Mamoru Tasaka <mtasaka@fedoraproject.org> - 1.3.1-1
+- Update from Marek Goldmann <mgoldman@redhat.com>
+  - Updated to 1.3.1
+  - Patch to make it work with Rake >= 0.9.0.beta.0
+
 * Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.3.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
