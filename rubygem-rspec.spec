@@ -1,66 +1,53 @@
-%global ruby_sitelib %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")
-%global gemdir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
-%global gemname rspec
-%global geminstdir %{gemdir}/gems/%{gemname}-%{version}
+%global gem_name rspec
 
 Summary: Behaviour driven development (BDD) framework for Ruby
-Name: rubygem-%{gemname}
-Version: 1.3.1
-Release: 2%{?dist}
+Name: rubygem-%{gem_name}
+Version: 2.8.0
+Release: 1%{?dist}
 Group: Development/Languages
-License: GPLv2+ or Ruby
+License: MIT
 URL: http://rspec.info
-Source0: http://gems.rubyforge.org/gems/%{gemname}-%{version}.gem
-Patch0:  rubygem-rspec-1.3.1-RakeFileUtils_renamed_to_FileUtilsExt.patch
+Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: rubygems, ruby(abi)  = 1.8
-BuildRequires: rubygems, ruby
+Requires: rubygems
+Requires: rubygem(rspec-core) = %{version}
+Requires: rubygem(rspec-mocks) = %{version}
+Requires: rubygem(rspec-expectations) = %{version}
+Requires: ruby(abi)  = 1.9.1
+BuildRequires: rubygems-devel
+BuildRequires: ruby(abi) = 1.9.1
 BuildArch: noarch
-Provides: rubygem(%{gemname}) = %{version}
+Provides: rubygem(%{gem_name}) = %{version}
 
 %description
 RSpec is a behaviour driven development (BDD) framework for Ruby.  
 
-
 %prep
 %setup -q -c -T
-gem install \
-	-V \
-	--install-dir $(pwd)%{gemdir} \
-	--bindir $(pwd)%{_bindir} \
-	--force \
-	--rdoc \
-	%{SOURCE0}
-
-
-pushd .%{geminstdir}
-%patch0 -p1
-popd
-
-find . -type f | xargs chmod ugo+r
+mkdir -p .%{gem_dir}
+gem install --local --install-dir .%{gem_dir} \
+            --force %{SOURCE0}
 
 %build
 
 %install
-mkdir -p %{buildroot}%{gemdir}
-cp -a .%{_prefix}/* %{buildroot}%{_prefix}/
-
-find %{buildroot}%{geminstdir}/bin -type f | xargs chmod a+x
-
-%clean
 rm -rf %{buildroot}
+mkdir -p %{buildroot}%{gem_dir}
+cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}
 
 %files
-%defattr(-, root, root, -)
-%{_bindir}/*
-%{gemdir}/gems/%{gemname}-%{version}/
-%doc %{gemdir}/doc/%{gemname}-%{version}
-#%doc %{geminstdir}/*.txt
-%{gemdir}/cache/%{gemname}-%{version}.gem
-%{gemdir}/specifications/%{gemname}-%{version}.gemspec
-
+%doc %{gem_docdir}
+%dir %{gem_instdir}
+%{gem_instdir}/lib
+%{gem_instdir}/License.txt
+%{gem_instdir}/README.markdown
+%exclude %{gem_cache}
+%{gem_spec}
 
 %changelog
+* Mon Mar 05 2012 Vít Ondruch <bkabrda@redhat.com> - 2.8.0-1
+- Update to RSpec 2.8.0.
+
 * Sat Jan 14 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.3.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
