@@ -40,7 +40,7 @@ cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}
 %dir %{gem_instdir}
 %{gem_instdir}/lib
 %{gem_instdir}/License.txt
-%{gem_instdir}/README.markdown
+%{gem_instdir}/README.md
 %exclude %{gem_cache}
 %{gem_spec}
 
