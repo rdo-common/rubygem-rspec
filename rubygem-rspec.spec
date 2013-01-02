@@ -2,7 +2,7 @@
 
 Summary: Behaviour driven development (BDD) framework for Ruby
 Name: rubygem-%{gem_name}
-Version: 2.11.0
+Version: 2.12.0
 Release: 1%{?dist}
 Group: Development/Languages
 License: MIT
@@ -24,11 +24,29 @@ RSpec is a behaviour driven development (BDD) framework for Ruby.
 
 %prep
 %setup -q -c -T
-mkdir -p .%{gem_dir}
-gem install --local --install-dir .%{gem_dir} \
-            --force %{SOURCE0}
+
+TOPDIR=$(pwd)
+mkdir tmpunpackdir
+pushd tmpunpackdir
+
+gem unpack %{SOURCE0}
+cd %{gem_name}-%{version}
+gem specification -l --ruby %{SOURCE0} > %{gem_name}.gemspec
+gem build %{gem_name}.gemspec
+mv %{gem_name}-%{version}.gem $TOPDIR
+
+popd
+rm -rf tmpunpackdir
 
 %build
+mkdir -p .%{gem_dir}
+gem install \
+	-V \
+	--local \
+	--install-dir .%{gem_dir} \
+	--force \
+	--rdoc \
+	%{gem_name}-%{version}.gem
 
 %install
 rm -rf %{buildroot}
@@ -45,6 +63,9 @@ cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}
 %{gem_spec}
 
 %changelog
+* Wed Jan  2 2013 Mamoru TASAKA <mtasaka@fedoraproject.org> - 2.12.0-1
+- Update to Rspec 2.12.0
+
 * Thu Oct 11 2012 Mamoru Tasaka <mtasaka@fedoraproject.org> - 2.11.0-1
 - Update to Rspec 2.11.0
 
