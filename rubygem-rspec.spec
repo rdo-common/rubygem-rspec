@@ -3,7 +3,7 @@
 Summary: Behaviour driven development (BDD) framework for Ruby
 Name: rubygem-%{gem_name}
 Version: 2.12.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group: Development/Languages
 License: MIT
 URL: http://rspec.info
@@ -13,9 +13,9 @@ Requires: rubygems
 Requires: rubygem(rspec-core) >= %{version}
 Requires: rubygem(rspec-mocks) >= %{version}
 Requires: rubygem(rspec-expectations) >= %{version}
-Requires: ruby(abi)  = 1.9.1
+Requires: ruby(release)
 BuildRequires: rubygems-devel
-BuildRequires: ruby(abi) = 1.9.1
+BuildRequires: ruby(release)
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 
@@ -39,14 +39,7 @@ popd
 rm -rf tmpunpackdir
 
 %build
-mkdir -p .%{gem_dir}
-gem install \
-	-V \
-	--local \
-	--install-dir .%{gem_dir} \
-	--force \
-	--rdoc \
-	%{gem_name}-%{version}.gem
+%gem_install
 
 %install
 rm -rf %{buildroot}
@@ -63,6 +56,9 @@ cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}
 %{gem_spec}
 
 %changelog
+* Wed Feb 20 2013 Vít Ondruch <vondruch@redhat.com> - 2.12.0-3
+- Rebuild for https://fedoraproject.org/wiki/Features/Ruby_2.0.0
+
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.12.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
