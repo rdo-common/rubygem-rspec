@@ -2,7 +2,7 @@
 
 Summary:	Behaviour driven development (BDD) framework for Ruby
 Name:		rubygem-%{gem_name}
-Version:	3.3.0
+Version:	3.4.0
 Release:	1%{?dist}
 
 Group:		Development/Languages
@@ -11,7 +11,7 @@ URL:		http://rspec.info
 Source0:	http://rubygems.org/gems/%{gem_name}-%{version}.gem
 
 BuildRequires:	rubygems-devel
-BuildRequires:	ruby(release)
+#BuildRequires:	ruby(release)
 
 BuildArch:	noarch
 
@@ -46,7 +46,7 @@ cp -a .%{gem_dir}/* \
 %files
 %dir	%{gem_instdir}
 %{gem_instdir}/lib
-%license	%{gem_instdir}/License.txt
+%license	%{gem_instdir}/LICENSE.md
 %doc	%{gem_instdir}/README.md
 %exclude %{gem_cache}
 %{gem_spec}
@@ -56,6 +56,9 @@ cp -a .%{gem_dir}/* \
 
 
 %changelog
+* Tue Dec  8 2015 Mamoru TASAKA <mtasaka@fedoraproject.org> - 3.4.0-1
+- 3.4.0
+
 * Sun Aug  2 2015 Mamoru TASAKA <mtasaka@fedoraproject.org> - 3.3.0-1
 - 3.3.0
 
