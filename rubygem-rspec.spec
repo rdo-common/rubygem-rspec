@@ -3,7 +3,7 @@
 Summary:	Behaviour driven development (BDD) framework for Ruby
 Name:		rubygem-%{gem_name}
 Version:	3.7.0
-Release:	3%{?dist}
+Release:	3%{?dist}.1
 
 Group:		Development/Languages
 License:	MIT
@@ -12,6 +12,7 @@ Source0:	http://rubygems.org/gems/%{gem_name}-%{version}.gem
 
 BuildRequires:	rubygems-devel
 #BuildRequires:	ruby(release)
+Provides: rubygem(%{gem_name}) = %{version}
 
 BuildArch:	noarch
 
